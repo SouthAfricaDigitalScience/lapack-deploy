@@ -1,6 +1,7 @@
 #!/bin/bash
 module add ci
 module add cmake
+echo "going to $WORKSPACE/$NAME-$VERSION"
 cd $WORKSPACE/$NAME-$VERSION
 make test
 python lapack_testing.py
