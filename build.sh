@@ -2,7 +2,9 @@
 module add ci
 module add cmake
 which cmake
-if [ $? != 0 ] ; then exit fi
+if [[ $? != 0 ]] ; then
+  exit 1
+fi
 SOURCE_FILE=$NAME-$VERSION.tar.gz
 mkdir -p $SRC_DIR
 if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
