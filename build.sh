@@ -1,5 +1,6 @@
 #!/bin/bash
 module add ci
+module add gcc/4.8.2
 module add cmake
 which cmake
 if [[ $? != 0 ]] ; then
