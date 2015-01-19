@@ -1,7 +1,7 @@
 #!/bin/bash
 module add ci
 module add cmake
-
+cd $WORKSPACE/$NAME-$VERSION
 make test
 python lapack_testing.py
 echo "Making modulefile"
