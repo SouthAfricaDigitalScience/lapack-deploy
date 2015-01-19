@@ -1,6 +1,7 @@
 #!/bin/bash
 module add ci
 SOURCE_FILE=$NAME-$VERSION.tar.gz
+mkdir -p $SRC_DIR
 if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
   echo "Seems that the latest version is not available under $SRC_DIR - downloading from netlib.org"
   wget http://www.netlib.org/$NAME/$NAME-$VERSION.tgz -O  $SRC_DIR/$SOURCE_FILE
