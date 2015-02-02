@@ -5,6 +5,8 @@ echo "going to $WORKSPACE/$NAME-$VERSION"
 cd $WORKSPACE/$NAME-$VERSION
 make test
 python lapack_testing.py
+# how about actually install
+make install
 echo "Making modulefile"
 mkdir -p modules
 (
