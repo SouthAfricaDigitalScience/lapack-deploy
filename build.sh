@@ -15,7 +15,7 @@ if [[ ! -s $SRC_DIR/$SOURCE_FILE ]] ; then
   tar xzf $SRC_DIR/$SOURCE_FILE -C $WORKSPACE
 fi
 cd $NAME-$VERSION
-cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$SOFT_DIR
+cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$SOFT_DIR  -DBUILD_SHARED_LIBS=ON 
 nice -n20 make
 
 find . -name "*.a"
