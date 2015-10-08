@@ -1,6 +1,7 @@
 #!/bin/bash
 module add ci
 module add cmake
+module add gcc/${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
 cd $WORKSPACE/$NAME-$VERSION
 make test
@@ -25,9 +26,9 @@ setenv       LAPACK_DIR           /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/
 prepend-path LD_LIBRARY_PATH   $::env(LAPACK_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(LAPACK_DIR)/include
 MODULE_FILE
-) > modules/$VERSION
+) > modules/${VERSION}-${GCC_VERSION}
 
-mkdir -p $LIBRARIES_MODULES/$NAME
-cp modules/$VERSION $LIBRARIES_MODULES/$NAME
+mkdir -p ${LIBRARIES_MODULES}/${NAME}
+cp modules/${VERSION}-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}/${VERSION}-${GCC_VERSION}
 module avail
-module add lapack
+module add ${NAME}/${VERSION}-${GCC_VERSION}
