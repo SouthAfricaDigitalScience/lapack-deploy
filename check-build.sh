@@ -1,4 +1,5 @@
 #!/bin/bash
+. /usr/share/modules/init/bash
 module add ci
 module add cmake
 module add gcc/${GCC_VERSION}
