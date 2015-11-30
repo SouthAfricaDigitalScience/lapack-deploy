@@ -30,7 +30,7 @@ else
 fi
 cd ${NAME}-${VERSION}
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}  -DBUILD_SHARED_LIBS=ON
-nice -n20 make
+nice -n20 make -j4
 
 find . -name "*.a"
 find . -name "*.so"
