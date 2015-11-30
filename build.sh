@@ -1,5 +1,5 @@
-#!/bin/bash
-. /usr/share/modules/init/bash
+#!/bin/bash -e
+. /etc/profile.d/modules.sh
 module add ci
 module add gcc/${GCC_VERSION}
 module add cmake
@@ -9,14 +9,27 @@ if [[ $? != 0 ]] ; then
 fi
 SOURCE_FILE=${NAME}-${VERSION}.tar.gz
 mkdir -p ${SRC_DIR}
-if [[ ! -s ${SRC_DIR}/${SOURCE_FILE} ]] ; then
+
+if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
+  touch  ${SRC_DIR}/${SOURCE_FILE}.lock
   echo "Seems that the latest version is not available under ${SRC_DIR} - downloading from netlib.org"
   wget http://www.netlib.org/${NAME}/${NAME}-${VERSION}.tgz -O  ${SRC_DIR}/${SOURCE_FILE}
   wget http://www.netlib.org/blas/blas.tgz  ${SRC_DIR}/blas.tar.gz
   tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
+  echo "releasing lock"
+  rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
+elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
+  # Someone else has the file, wait till it's released
+  while [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; do
+    echo " There seems to be a download currently under way, will check again in 5 sec"
+    sleep 5
+  done
+else
+  # the tarball is there and has finished downlading
+    echo "continuing from previous builds, using source at ${SRC_DIR}/${SOURCE_FILE}"
 fi
-cd $NAME-$VERSION
-cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$SOFT_DIR  -DBUILD_SHARED_LIBS=ON
+cd ${NAME}-${VERSION}
+cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}  -DBUILD_SHARED_LIBS=ON
 nice -n20 make
 
 find . -name "*.a"

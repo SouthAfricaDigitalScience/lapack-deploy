@@ -4,7 +4,7 @@ module add ci
 module add cmake
 module add gcc/${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
-cd $WORKSPACE/$NAME-$VERSION
+cd ${WORKSPACE}/${NAME}-${VERSION}
 make test
 python lapack_testing.py
 # how about actually install
