@@ -15,7 +15,6 @@ if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ]
   echo "Seems that the latest version is not available under ${SRC_DIR} - downloading from netlib.org"
   wget http://www.netlib.org/${NAME}/${NAME}-${VERSION}.tgz -O  ${SRC_DIR}/${SOURCE_FILE}
   wget http://www.netlib.org/blas/blas.tgz  -O ${SRC_DIR}/blas.tar.gz
-  tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE}
   echo "releasing lock"
   rm -v ${SRC_DIR}/${SOURCE_FILE}.lock
 elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
@@ -27,6 +26,7 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   # the tarball is there and has finished downlading
     echo "continuing from previous builds, using source at ${SRC_DIR}/${SOURCE_FILE}"
+    tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 fi
 cd ${WORKSPACE}/${NAME}-${VERSION}
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}  -DBUILD_SHARED_LIBS=ON
