@@ -28,7 +28,7 @@ else
   # the tarball is there and has finished downlading
     echo "continuing from previous builds, using source at ${SRC_DIR}/${SOURCE_FILE}"
 fi
-cd ${NAME}-${VERSION}
+cd ${WORKSPACE}/${NAME}-${VERSION}
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}  -DBUILD_SHARED_LIBS=ON
 nice -n20 make -j4
 
