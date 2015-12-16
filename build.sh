@@ -13,6 +13,7 @@ mkdir -p ${SRC_DIR}
 if [ ! -e ${SRC_DIR}/${SOURCE_FILE}.lock ] && [ ! -s ${SRC_DIR}/${SOURCE_FILE} ] ; then
   touch  ${SRC_DIR}/${SOURCE_FILE}.lock
   echo "Seems that the latest version is not available under ${SRC_DIR} - downloading from netlib.org"
+
   wget http://www.netlib.org/${NAME}/${NAME}-${VERSION}.tgz -O  ${SRC_DIR}/${SOURCE_FILE}
   wget http://www.netlib.org/blas/blas.tgz  -O ${SRC_DIR}/blas.tar.gz
   echo "releasing lock"
@@ -26,11 +27,10 @@ elif [ -e ${SRC_DIR}/${SOURCE_FILE}.lock ] ; then
 else
   # the tarball is there and has finished downlading
     echo "continuing from previous builds, using source at ${SRC_DIR}/${SOURCE_FILE}"
-    tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 fi
+tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cmake ../ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION}  -DBUILD_SHARED_LIBS=ON
-nice -n20 make -j4
 find . -name "*.a"
 find . -name "*.so"
