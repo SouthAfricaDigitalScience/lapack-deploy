@@ -1,12 +1,13 @@
 #!/bin/bash
 . /etc/profile.d/modules.sh
-module add ci
+module add deploy
 module add cmake
 module add gcc/${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
-make test
-python lapack_testing.py
+rm -rf *
+cmake ../ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION}  -DBUILD_SHARED_LIBS=ON
+make
 # how about actually install
 make install
 echo "Making modulefile"
@@ -21,9 +22,9 @@ proc ModulesHelp { } {
   puts stderr "       that the [module-info name] module is not available"
 }
 module add gcc/${GCC_VERSION}
-module-whatis   "$NAME $VERSION."
-setenv       LAPACK_VERSION    $VERSION-gcc-${GCC_VERSION}
-setenv       LAPACK_DIR        /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-${GCC_VERSION}
+module-whatis   "$NAME $VERSION. See https://github.com/SouthAfricaDigitalScience/lapack-deploy"
+setenv       LAPACK_VERSION    $VERSION
+setenv       LAPACK_DIR        $::env(CVMFS_DIR)$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-${GCC_VERSION}
 prepend-path LD_LIBRARY_PATH   $::env(LAPACK_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(LAPACK_DIR)/include
 MODULE_FILE
