@@ -9,6 +9,14 @@ make test
 python lapack_testing.py
 # how about actually install
 make install
+echo "In ${SOFT_DIR}-gcc-${GCC_VERSION} we have "
+ls ${SOFT_DIR}-gcc-${GCC_VERSION}
+# on SL6 , there is only a lib64 directory created - if the lib dir is missing, link lib64 to it.
+if [ ! -d ${SOFT_DIR}-gcc-${GCC_VERSION}/lib ] ; then
+  echo "linking lib dir"
+  ln -s -v ${SOFT_DIR}-gcc-${GCC_VERSION}/lib64 ${SOFT_DIR}-gcc-${GCC_VERSION}/lib
+fi
+
 echo "Making modulefile"
 mkdir -p modules
 (
