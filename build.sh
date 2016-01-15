@@ -35,5 +35,6 @@ tar xzf ${SRC_DIR}/${SOURCE_FILE} -C ${WORKSPACE} --skip-old-files
 mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cmake ../ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION}  -DBUILD_SHARED_LIBS=ON
+make -j2 
 find . -name "*.a"
 find . -name "*.so"
