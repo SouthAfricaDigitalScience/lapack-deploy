@@ -26,6 +26,7 @@ module-whatis   "$NAME $VERSION. See https://github.com/SouthAfricaDigitalScienc
 setenv       LAPACK_VERSION    $VERSION
 setenv       LAPACK_DIR        $::env(CVMFS_DIR)/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-${GCC_VERSION}
 prepend-path LD_LIBRARY_PATH   $::env(LAPACK_DIR)/lib
+prepend-path LD_LIBRARY_PATH   $::env(LAPACK_DIR)/lib64
 prepend-path GCC_INCLUDE_DIR   $::env(LAPACK_DIR)/include
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}
