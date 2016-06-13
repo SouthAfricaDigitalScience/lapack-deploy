@@ -6,7 +6,10 @@ module add gcc/${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 rm -rf *
-cmake ../ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION}  -DBUILD_SHARED_LIBS=ON
+cmake ../ -G "Unix Makefiles" \
+-DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION} \
+-DBUILD_SHARED_LIBS=ON \
+-DLAPACKE=on
 make all
 # how about actually install
 make install
