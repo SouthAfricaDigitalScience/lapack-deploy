@@ -31,7 +31,7 @@ proc ModulesHelp { } {
 module add gcc/${GCC_VERSION}
 module-whatis   "$NAME $VERSION."
 setenv       LAPACK_VERSION    $VERSION-gcc-${GCC_VERSION}
-setenv       LAPACK_DIR        /apprepo/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-${GCC_VERSION}
+setenv       LAPACK_DIR        /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$NAME/$VERSION-gcc-${GCC_VERSION}
 prepend-path LD_LIBRARY_PATH   $::env(LAPACK_DIR)/lib
 prepend-path GCC_INCLUDE_DIR   $::env(LAPACK_DIR)/include
 MODULE_FILE

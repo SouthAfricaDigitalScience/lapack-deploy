@@ -9,6 +9,8 @@ rm -rf *
 cmake ../ -G "Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
+ -D"SITE=${SITE}" \
+ -D"USE_XBLAS=off" \
 -DLAPACKE=on
 make all
 # how about actually install

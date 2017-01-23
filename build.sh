@@ -37,7 +37,9 @@ cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cmake ../ -G "Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION} \
 -DBUILD_SHARED_LIBS=ON \
--DLAPACKE=on 
+ -D"SITE=${SITE}" \
+ -D"USE_XBLAS=off" \
+-DLAPACKE=on
 make -j2 all
 find . -name "*.a"
 find . -name "*.so"
