@@ -37,7 +37,7 @@ prepend-path GCC_INCLUDE_DIR   $::env(LAPACK_DIR)/include
 MODULE_FILE
 ) > modules/${VERSION}-gcc-${GCC_VERSION}
 
-mkdir -p ${LIBRARIES_MODULES}/${NAME}
-cp modules/${VERSION}-gcc-${GCC_VERSION} ${LIBRARIES_MODULES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}
+mkdir -p ${LIBRARIES}/${NAME}
+cp modules/${VERSION}-gcc-${GCC_VERSION} ${LIBRARIES}/${NAME}/${VERSION}-gcc-${GCC_VERSION}
 module avail
 module add ${NAME}/${VERSION}-gcc-${GCC_VERSION}

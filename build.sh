@@ -40,6 +40,6 @@ cmake ../ -G "Unix Makefiles" \
  -D"SITE=${SITE}" \
  -D"USE_XBLAS=off" \
 -DLAPACKE=on
-make -j2 all
+make all
 find . -name "*.a"
 find . -name "*.so"
