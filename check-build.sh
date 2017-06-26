@@ -3,11 +3,10 @@
 module add ci
 module add cmake
 module add gcc/${GCC_VERSION}
+module  add python/${PYTHON_VERSION}-gcc-${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 make test
-python lapack_testing.py
-# how about actually install
 make install
 echo "In ${SOFT_DIR}-gcc-${GCC_VERSION} we have "
 ls ${SOFT_DIR}-gcc-${GCC_VERSION}

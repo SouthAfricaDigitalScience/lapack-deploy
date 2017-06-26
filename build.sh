@@ -36,6 +36,7 @@ mkdir -p ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 cmake ../ -G "Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION} \
+-DCMAKE_Fortran_COMPILER:FILEPATH=${GCC_DIR}/bin/gfortran \
 -DBUILD_SHARED_LIBS=ON \
  -D"SITE=${SITE}" \
  -D"USE_XBLAS=off" \

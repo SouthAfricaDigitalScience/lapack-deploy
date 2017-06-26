@@ -3,11 +3,13 @@
 module add deploy
 module add cmake
 module add gcc/${GCC_VERSION}
+module add  python/${PYTHON_VERSION}-gcc-${GCC_VERSION}
 echo "going to $WORKSPACE/$NAME-$VERSION"
 cd ${WORKSPACE}/${NAME}-${VERSION}/build-${BUILD_NUMBER}
 rm -rf *
 cmake ../ -G "Unix Makefiles" \
 -DCMAKE_INSTALL_PREFIX=${SOFT_DIR}-gcc-${GCC_VERSION} \
+-DCMAKE_Fortran_COMPILER:FILEPATH=${GCC_DIR}/bin/gfortran \
 -DBUILD_SHARED_LIBS=ON \
  -D"SITE=${SITE}" \
  -D"USE_XBLAS=off" \
